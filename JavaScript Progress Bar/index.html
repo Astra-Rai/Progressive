@@ -1,26 +1,73 @@
 <!DOCTYPE HTML>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="description" content="specifically descrpitive content about your page here">
-  <!--scripts here-->
-  <script src="script.js"></script>
-  <!--[if lt IE 9]>
+     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=yourfonthere" rel="stylesheet">
-  <title>Page Title Here</title>
+  <title>Progress Bar</title>
 </head>
 <body>
   <!-- begin page content -->
   <div id="pagewrap">
-    <h1 class="header"> Progress Bar </h1>
+    <h2 class="header"> Progress Bar </h2>
     <progress id = "progressBar" value = "0" max="100" style = "width:300px;"></progress>
     <span id = "status"></span>
     <h1 id = "finalMessage"></h1> 
   </div><!--END PAGEWRAP--> 
+
+  <script>
+//from tutorial https://www.youtube.com/watch?v=gUJiTBIXcMI 
+ function progressBarSim(al){
+
+//bar variable represents progress bar element
+//we get access to element by wrapping it in a variable  
+
+var bar = document.getElementById('progressBar');
+//status variable represents the span element
+
+var status = document.getElementById('status');
+//on the right, at end of progress bar, progress percentage is noted
+//status variable contains the id = 'status' of span element
+//<span id = "status"></span>
+
+status.innerHTML = al + "%";
+//remember  var amountLoaded = 0
+//therefore bar value begins at 0 when page loads
+bar.value= al;
+//increment the argument, passed through function progress bar by 1
+al++;
+        //variable sim wraps setTimeOutMethodCode
+        var sim = setTimeout("progressBarSim(" + al + ")", 100);
+
+        //if al equals 100...
+        if(al ===100){
+        
+        //change innerHTMLof span to 100%
+        status.innerHTML = "100%";
+        
+        bar.value = 100;
+        //once al === 100, stop running setTimeOutFunction
+        //remember variable sim contain the setTimeOut fu
+        clearTimeout(sim);
+
+        //in varible progressComplete, target h1 element with id "finalMessage"
+
+        var progressComplete = document.getElementById('finalMessage');
+        
+        //change innerHTML
+        progressComplete.innerHTML = "It Works, Fam! #facts !!!";
+
+        }
+ }
+        //when page is loaded, the progress value is 0
+        //this value is increment by 1 when passed as an argument through fuction progressBarSim
+        var amountLoaded = 0;
+        //when page load call function progressBarSim
+        //automatically pass variable, amountLoaded, as argument thru function
+        progressBarSim(amountLoaded);
+</script>
 </body>
 </html>
-
